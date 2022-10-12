@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ITEC</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+{% if user.is_authenticated == False %}
+
+<div style="display: flex; flex-direction: column; justify-content: center;">
+  <div style="display: flex; justify-content: center;">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <table>{{ form.as_table }}</table>
+      <button>Войти</button>
+    </form>
+   </div>
+</div>
+
+{% else %}
+
+<div class="main__header">
+  <a href="{% url 'manager:start_page' %}" class="main__header-a">ITEC</a>
+</div>
+<div class="navbar">
+    {% if user.is_superuser %}
+    <a href="http://127.0.0.1:8000/admin/" class="header-a">Администрирование</a>
+    {% endif %}
+    <a href="{% url 'manager:logout' %}">Выйти</a>
+</div>
+
+{% endif %}
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
