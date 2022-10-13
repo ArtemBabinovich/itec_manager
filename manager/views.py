@@ -6,4 +6,4 @@ class CustomLoginView(LoginView):
 
 
 class CustomLogoutView(LogoutView):
-    template_name = 'start_page.html'
+    pass

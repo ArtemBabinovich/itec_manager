@@ -8,33 +8,59 @@
 </head>
 <body>
 
+<div class="container">
+
 {% if user.is_authenticated == False %}
-
-<div style="display: flex; flex-direction: column; justify-content: center;">
-  <div style="display: flex; justify-content: center;">
-    <form action="" method="POST">
-      {% csrf_token %}
-      <table>{{ form.as_table }}</table>
-      <button>Войти</button>
-    </form>
-   </div>
+<div class="login">
+        <h1>ITEC</h1>
+        <h2>Вход в систему</h2>
+        <form action="" method="POST">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button style="width: 100%;">Войти</button>
+        </form>
 </div>
-
-{% else %}
-
-<div class="main__header">
-  <a href="{% url 'manager:start_page' %}" class="main__header-a">ITEC</a>
-</div>
-<div class="navbar">
-    {% if user.is_superuser %}
-    <a href="http://127.0.0.1:8000/admin/" class="header-a">Администрирование</a>
-    {% endif %}
-    <a href="{% url 'manager:logout' %}">Выйти</a>
-</div>
-
 {% endif %}
 
+{% if user.is_authenticated %}
+    <div class="navbar">
+        <a href="#">{{ user.first_name }}</a>
+        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/56/56745.png"
+                        height=40px
+                        width=40px
+                        alt="Аватар"></a>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <a href="#">Профиль</a>
+            </button>
+            <div class="dropdown-content">
+                {% if user.is_superuser %}
+                <a href="http://127.0.0.1:8000/admin/" class="header-a">Администрирование</a>
+                {% endif %}
+                <a href="#">Личный кабинет</a>
+                <a href="#">Сообщения</a>
+                <a href="{% url 'manager:logout' %}">Выйти</a>
+            </div>
+        </div>
+    </div>
+    <div class="container__menu">
+        <a href="{% url 'manager:start_page' %}" class="container__menu-logo">ITEC</a>
+        <a href="#" class="container__menu-a">Группы</a>
+        <a href="#" class="container__menu-a">Расписание</a>
+        <a href="#" class="container__menu-a">Чат</a>
+        <a href="#" class="container__menu-a">Преподаватели</a>
+        <a href="#" class="container__menu-a">Лиды</a>
+        <a href="#" class="container__menu-a">Контракты</a>
+        <a href="#" class="container__menu-a">Новости школы</a>
+        <a href="#" class="container__menu-a">Личные данные</a>
+        <a href="#" class="container__menu-a">Заказы</a>
+        <a href="{% url 'manager:logout' %}" class="container__menu-a">Выход</a>
+    </div>
 {% block content %}
 {% endblock %}
+{% endif %}
+
+</div>
+
 </body>
 </html>
