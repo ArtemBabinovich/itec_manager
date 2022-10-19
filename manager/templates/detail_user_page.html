@@ -1,0 +1,34 @@
+{% extends "start_page.html" %}
+{% block content %}
+
+<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+    Logo
+    <p>{{ object.first_name }} {{ object.second_name }}</p>
+    <a href="#">Написать сообщение</a>
+</div>
+<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+Личные данные
+    <p>Фамилия: {{ object.second_name }}</p>
+    <p>Имя: {{ object.first_name }}</p>
+    <p>Пол: {{ object.sex }}</p>
+    <p>Телефон: {{ object.phone }}</p>
+    <p>Email: {{ object.email }}</p>
+    <p>ID:{{ object.id }} </p>
+    <p>Возраст</p>
+    <p>Интересы {{ object.interests }}</p>
+    <a href="#">Внести изменения</a>
+</div>
+<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+Курс
+<p>Теория</p>
+<p>Практика</p>
+<p>ДЗ</p>
+<p>Проект</p>
+<p>Посещение</p>
+</div>
+<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+Договорные данные
+<p>Тут должна быть табличка</p>
+</div>
+
+{% endblock %}

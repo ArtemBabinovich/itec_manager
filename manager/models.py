@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
@@ -14,6 +15,9 @@ class CustomUser(AbstractUser):
     interests = models.TextField(verbose_name="Интересы", blank=True, null=True, max_length=500)
     is_teacher = models.BooleanField(verbose_name="Преподаватель", default=False)
     is_student = models.BooleanField(verbose_name="Студент", default=False)
+
+    def get_absolute_url(self):
+        return reverse('manager:user_detail', args=[self.id])
 
 
 class Course(models.Model):

@@ -41,7 +41,7 @@
                 {% if user.is_superuser %}
                 <a href="http://127.0.0.1:8000/admin/">Администрирование</a>
                 {% endif %}
-                <a href="#">Личный кабинет</a>
+                <a href="{{ user.get_absolute_url }}">Личный кабинет</a>
                 <a href="#">Сообщения</a>
                 <a href="{% url 'manager:logout' %}">Выйти</a>
             </div>
