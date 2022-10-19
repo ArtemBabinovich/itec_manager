@@ -38,9 +38,9 @@ class CustomUserRegisterForm(forms.ModelForm):
                                 widget=forms.PasswordInput)
     birthday = forms.DateField(label='Дата рождения',
                                widget=forms.SelectDateWidget(years=range(datetime.date.today().year - 100,
-                                                                         datetime.date.today().year)),
-                               initial=datetime.date.today())
-    interests = forms.CharField(label='Адрес',
+                                                                         datetime.date.today().year)))
+    interests = forms.CharField(required=False,
+                                label='Интересы',
                                 max_length=500)
 
     def clean_password1(self):
@@ -68,14 +68,5 @@ class CustomUserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'phone', 'password1', 'password2', 'first_name', 'last_name', 'birthday',
-                  'address']
-
-
-# class CustomLoginForm(AuthenticationForm):
-#     username = UsernameField(widget=forms.TextInput(attrs={"autofocus": True}))
-#     password = forms.CharField(
-#         label="Пароль",
-#         strip=False,
-#         widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
-#     )
+        fields = ['username', 'email', 'phone', 'password1', 'password2', 'first_name', 'last_name', 'sex', 'birthday',
+                  'interests', 'is_staff', 'is_teacher', 'is_student']

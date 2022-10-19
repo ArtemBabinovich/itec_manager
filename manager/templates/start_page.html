@@ -23,11 +23,15 @@
 {% endif %}
 
 {% if user.is_authenticated %}
-    <div class="navbar">
+<div class="navbar">
+    <div class="navbar-block">
+        <a href="{% url 'manager:start_page' %}" class="navbar-logo">ITEC</a>
+    </div>
+    <div class="navbar-block">
         <a href="#">{{ user.first_name }}</a>
         <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/56/56745.png"
-                        height=40px
-                        width=40px
+                        height=35px
+                        width=35px
                         alt="Аватар"></a>
         <div class="dropdown">
             <button class="dropbtn">
@@ -35,7 +39,7 @@
             </button>
             <div class="dropdown-content">
                 {% if user.is_superuser %}
-                <a href="http://127.0.0.1:8000/admin/" class="header-a">Администрирование</a>
+                <a href="http://127.0.0.1:8000/admin/">Администрирование</a>
                 {% endif %}
                 <a href="#">Личный кабинет</a>
                 <a href="#">Сообщения</a>
@@ -43,21 +47,28 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container__main">
     <div class="container__menu">
-        <a href="{% url 'manager:start_page' %}" class="container__menu-logo">ITEC</a>
-        <a href="#" class="container__menu-a">Группы</a>
-        <a href="#" class="container__menu-a">Расписание</a>
-        <a href="#" class="container__menu-a">Чат</a>
-        <a href="#" class="container__menu-a">Преподаватели</a>
-        <a href="#" class="container__menu-a">Лиды</a>
-        <a href="#" class="container__menu-a">Контракты</a>
-        <a href="#" class="container__menu-a">Новости школы</a>
-        <a href="#" class="container__menu-a">Личные данные</a>
-        <a href="#" class="container__menu-a">Заказы</a>
-        <a href="{% url 'manager:logout' %}" class="container__menu-a">Выход</a>
+        {% if user.is_superuser or user.is_staff %}
+        <a href="{% url 'manager:register_user' %}">Создание пользователя</a>
+        {% endif %}
+        <a href="#">Группы</a>
+        <a href="#">Расписание</a>
+        <a href="#">Чат</a>
+        <a href="#">Преподаватели</a>
+        <a href="#">Лиды</a>
+        <a href="#">Контракты</a>
+        <a href="#">Новости школы</a>
+        <a href="#">Личные данные</a>
+        <a href="#">Заказы</a>
+        <a href="{% url 'manager:logout' %}">Выход</a>
     </div>
-{% block content %}
-{% endblock %}
+    <div class="main">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 {% endif %}
 
 </div>
