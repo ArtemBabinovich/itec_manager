@@ -1,0 +1,30 @@
+{% extends "start_page.html" %}
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form">
+        {% for field in form %}
+            {% if field == form.is_staff %}
+                {% if user.is_superuser %}
+                   <div class="form-content">
+                        {{field.label_tag}}
+                        <div class="form-field">{{field}}</div>
+                        <div class="form-help">{{field.help_text}}</div>
+                        <div class="error">{{field.errors}}</div>
+                    </div>
+                {% endif %}
+            {% else %}
+            <div class="form-content">
+                {{field.label_tag}}
+                <div class="form-field">{{field}}</div>
+                <div class="form-help">{{field.help_text}}</div>
+                <div class="form-error">{{field.errors}}</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <p><input type="submit" value="Сохранить" class="form-field"></p>
+    </div>
+</form>
+
+{% endblock %}

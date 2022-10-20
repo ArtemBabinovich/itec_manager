@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
     interests = models.TextField(verbose_name="Интересы", blank=True, null=True, max_length=500)
     is_teacher = models.BooleanField(verbose_name="Преподаватель", default=False)
     is_student = models.BooleanField(verbose_name="Студент", default=False)
+    photo = models.ImageField(verbose_name="Фото", blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('manager:user_detail', args=[self.id])

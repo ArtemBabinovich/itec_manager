@@ -28,10 +28,9 @@
         <a href="{% url 'manager:start_page' %}" class="navbar-logo">ITEC</a>
     </div>
     <div class="navbar-block">
-        <a href="#">{{ user.first_name }}</a>
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/56/56745.png"
-                        height=35px
-                        width=35px
+        <a href="{{ user.get_absolute_url }}">{{ user.first_name }}</a>
+        <a href="{{ user.get_absolute_url }}"><img src="{{ user.photo.url }}"
+                        height=40px
                         alt="Аватар"></a>
         <div class="dropdown">
             <button class="dropbtn">
@@ -60,7 +59,7 @@
         <a href="#">Лиды</a>
         <a href="#">Контракты</a>
         <a href="#">Новости школы</a>
-        <a href="#">Личные данные</a>
+        <a href="{{ user.get_absolute_url }}">Личные данные</a>
         <a href="#">Заказы</a>
         <a href="{% url 'manager:logout' %}">Выход</a>
     </div>

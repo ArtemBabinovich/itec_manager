@@ -2,7 +2,7 @@
 {% block content %}
 
 <div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
-    Logo
+    <img src="{{ object.photo.url }}" alt="Фото">
     <p>{{ object.first_name }} {{ object.second_name }}</p>
     <a href="#">Написать сообщение</a>
 </div>
@@ -13,10 +13,10 @@
     <p>Пол: {{ object.sex }}</p>
     <p>Телефон: {{ object.phone }}</p>
     <p>Email: {{ object.email }}</p>
-    <p>ID:{{ object.id }} </p>
-    <p>Возраст</p>
-    <p>Интересы {{ object.interests }}</p>
-    <a href="#">Внести изменения</a>
+    <p>ID: {{ object.id }} </p>
+    <p>Возраст: {{ object.age }} ({{ object.birthday }})</p>
+    <p>Интересы: {{ object.interests }}</p>
+    <a href="{% url 'manager:change_user_detail' object.id %}">Внести изменения</a>
 </div>
 <div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
 Курс

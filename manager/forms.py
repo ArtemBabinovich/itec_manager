@@ -2,7 +2,6 @@ import datetime
 
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
@@ -69,4 +68,11 @@ class CustomUserRegisterForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'phone', 'password1', 'password2', 'first_name', 'last_name', 'sex', 'birthday',
-                  'interests', 'is_staff', 'is_teacher', 'is_student']
+                  'photo', 'interests', 'is_staff', 'is_teacher', 'is_student']
+
+
+class ChangeUserDetailForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'phone', 'first_name', 'last_name', 'sex', 'birthday',
+                  'photo', 'interests', 'is_staff', 'is_teacher', 'is_student']
