@@ -49,19 +49,19 @@ class ChangeProfile(UpdateView):
 class ManagersView(View):
     def get(self, request):
         managers = CustomUser.objects.filter(is_staff=True)
-        context = {"users": managers}
+        context = {"users": managers, "header": "Наши менеджеры:"}
         return render(request, 'list_users_page.html', context)
 
 
 class TeachersView(View):
     def get(self, request):
         teachers = CustomUser.objects.filter(is_teacher=True)
-        context = {"users": teachers}
+        context = {"users": teachers, "header": "Наши преподователи:"}
         return render(request, 'list_users_page.html', context)
 
 
 class StudentsView(View):
     def get(self, request):
         students = CustomUser.objects.filter(is_student=True)
-        context = {"users": students}
+        context = {"users": students, "header": "Наши студенты:"}
         return render(request, 'list_users_page.html', context)

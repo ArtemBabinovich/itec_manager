@@ -2,7 +2,11 @@
 {% block content %}
 
 <div class="main_user_info">
+    {% if object.photo == None or object.photo == "" %}
+    <p>Фото не загружено</p>
+    {% else %}
     <img src="{{ object.photo.url }}" alt="Фото">
+    {% endif %}
     <p>{{ object.first_name }} {{ object.second_name }}</p>
     <a href="#">Написать сообщение</a>
 </div>
