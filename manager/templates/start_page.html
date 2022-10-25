@@ -13,12 +13,17 @@
 {% if user.is_authenticated == False %}
 <div class="login">
         <h1>ITEC</h1>
+        {% if request.path == "/" %}
         <h2>Вход в систему</h2>
         <form action="" method="POST">
         {% csrf_token %}
         <table>{{ form.as_table }}</table>
         <button style="width: 100%;">Войти</button>
         </form>
+        {% else %}
+            <h2>Вы не вошли в систему</h2>
+            <a href="{% url 'manager:start_page' %}">Перейти на страницу входа</a>
+        {% endif %}
 </div>
 {% endif %}
 
@@ -34,7 +39,7 @@
                         alt="Аватар"></a>
         <div class="dropdown">
             <button class="dropbtn">
-                <a href="#">Профиль</a>
+                <p>≡</p>
             </button>
             <div class="dropdown-content">
                 {% if user.is_superuser %}
@@ -55,7 +60,9 @@
         <a href="#">Группы</a>
         <a href="#">Расписание</a>
         <a href="#">Чат</a>
-        <a href="#">Преподаватели</a>
+        <a href="{% url 'manager:managers_page' %}">Менеджеры</a>
+        <a href="{% url 'manager:teachers_page' %}">Преподаватели</a>
+        <a href="{% url 'manager:students_page' %}">Студенты</a>
         <a href="#">Лиды</a>
         <a href="#">Контракты</a>
         <a href="#">Новости школы</a>

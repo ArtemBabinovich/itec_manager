@@ -1,8 +1,9 @@
 import datetime
 
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from manager.forms import CustomUserRegisterForm, ChangeUserDetailForm
@@ -43,3 +44,24 @@ class ChangeProfile(UpdateView):
     template_name = 'change_user_page.html'
     form_class = ChangeUserDetailForm
     success_url = reverse_lazy("manager:start_page")
+
+
+class ManagersView(View):
+    def get(self, request):
+        managers = CustomUser.objects.filter(is_staff=True)
+        context = {"users": managers}
+        return render(request, 'list_users_page.html', context)
+
+
+class TeachersView(View):
+    def get(self, request):
+        teachers = CustomUser.objects.filter(is_teacher=True)
+        context = {"users": teachers}
+        return render(request, 'list_users_page.html', context)
+
+
+class StudentsView(View):
+    def get(self, request):
+        students = CustomUser.objects.filter(is_student=True)
+        context = {"users": students}
+        return render(request, 'list_users_page.html', context)

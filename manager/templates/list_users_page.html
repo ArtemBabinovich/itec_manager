@@ -1,0 +1,13 @@
+{% extends "start_page.html" %}
+{% block content %}
+{% for user in users %}
+<div class="main_user_info">
+    <p>Фамилия: {{ user.last_name }}</p>
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Телефон: {{ user.phone }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>ID: {{ user.id }} </p>
+    <a href="{% url 'manager:change_user_detail' user.id %}">Внести изменения</a>
+</div>
+{% endfor %}
+{% endblock %}

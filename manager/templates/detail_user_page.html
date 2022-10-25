@@ -1,14 +1,14 @@
 {% extends "start_page.html" %}
 {% block content %}
 
-<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+<div class="main_user_info">
     <img src="{{ object.photo.url }}" alt="Фото">
     <p>{{ object.first_name }} {{ object.second_name }}</p>
     <a href="#">Написать сообщение</a>
 </div>
-<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+<div class="main_user_info">
 Личные данные
-    <p>Фамилия: {{ object.second_name }}</p>
+    <p>Фамилия: {{ object.last_name }}</p>
     <p>Имя: {{ object.first_name }}</p>
     <p>Пол: {{ object.sex }}</p>
     <p>Телефон: {{ object.phone }}</p>
@@ -18,7 +18,7 @@
     <p>Интересы: {{ object.interests }}</p>
     <a href="{% url 'manager:change_user_detail' object.id %}">Внести изменения</a>
 </div>
-<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+<div class="main_user_info">
 Курс
 <p>Теория</p>
 <p>Практика</p>
@@ -26,7 +26,7 @@
 <p>Проект</p>
 <p>Посещение</p>
 </div>
-<div style="width: 40%; border: 2px solid #071e1b; margin: 15px">
+<div class="main_user_info">
 Договорные данные
 <p>Тут должна быть табличка</p>
 </div>

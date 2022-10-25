@@ -1,6 +1,7 @@
 {% extends "start_page.html" %}
 {% block content %}
 
+{% if user.is_superuser or user.is_staff %}
 <form method="POST">
     {% csrf_token %}
     <div class="form">
@@ -26,5 +27,6 @@
         <p><input type="submit" value="Создать пользователя" class="form-field"></p>
     </div>
 </form>
+{% endif %}
 
 {% endblock %}
