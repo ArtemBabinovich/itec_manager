@@ -2,7 +2,6 @@ import datetime
 
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
@@ -38,9 +37,9 @@ class CustomUserRegisterForm(forms.ModelForm):
                                 widget=forms.PasswordInput)
     birthday = forms.DateField(label='Дата рождения',
                                widget=forms.SelectDateWidget(years=range(datetime.date.today().year - 100,
-                                                                         datetime.date.today().year)),
-                               initial=datetime.date.today())
-    interests = forms.CharField(label='Адрес',
+                                                                         datetime.date.today().year)))
+    interests = forms.CharField(required=False,
+                                label='Интересы',
                                 max_length=500)
 
     def clean_password1(self):
@@ -68,14 +67,12 @@ class CustomUserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'phone', 'password1', 'password2', 'first_name', 'last_name', 'birthday',
-                  'address']
+        fields = ['username', 'email', 'phone', 'password1', 'password2', 'first_name', 'last_name', 'sex', 'birthday',
+                  'photo', 'interests', 'is_staff', 'is_teacher', 'is_student']
 
 
-# class CustomLoginForm(AuthenticationForm):
-#     username = UsernameField(widget=forms.TextInput(attrs={"autofocus": True}))
-#     password = forms.CharField(
-#         label="Пароль",
-#         strip=False,
-#         widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
-#     )
+class ChangeUserDetailForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'phone', 'first_name', 'last_name', 'sex', 'birthday',
+                  'photo', 'interests', 'is_staff', 'is_teacher', 'is_student']

@@ -1,0 +1,14 @@
+{% extends "start_page.html" %}
+{% block content %}
+
+<div class="main_users_list">
+    {{ header }}
+    {% for user in users %}
+    <a href="{% url 'manager:user_detail' user.id %}">
+        {% if object.photo == None or object.photo == "" %}НЕТ ФОТО
+        {% else %}<img src="{{ user.photo.url }}" alt="Фото" height="40px">
+        {% endif %} {{ user.first_name }} {{ user.last_name }}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

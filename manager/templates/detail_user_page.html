@@ -1,0 +1,38 @@
+{% extends "start_page.html" %}
+{% block content %}
+
+<div class="main_user_info">
+    {% if object.photo == None or object.photo == "" %}
+    <p>Фото не загружено</p>
+    {% else %}
+    <img src="{{ object.photo.url }}" alt="Фото">
+    {% endif %}
+    <p>{{ object.first_name }} {{ object.second_name }}</p>
+    <a href="#">Написать сообщение</a>
+</div>
+<div class="main_user_info">
+Личные данные
+    <p>Фамилия: {{ object.last_name }}</p>
+    <p>Имя: {{ object.first_name }}</p>
+    <p>Пол: {{ object.sex }}</p>
+    <p>Телефон: {{ object.phone }}</p>
+    <p>Email: {{ object.email }}</p>
+    <p>ID: {{ object.id }} </p>
+    <p>Возраст: {{ object.age }} ({{ object.birthday }})</p>
+    <p>Интересы: {{ object.interests }}</p>
+    <a href="{% url 'manager:change_user_detail' object.id %}">Внести изменения</a>
+</div>
+<div class="main_user_info">
+Курс
+<p>Теория</p>
+<p>Практика</p>
+<p>ДЗ</p>
+<p>Проект</p>
+<p>Посещение</p>
+</div>
+<div class="main_user_info">
+Договорные данные
+<p>Тут должна быть табличка</p>
+</div>
+
+{% endblock %}

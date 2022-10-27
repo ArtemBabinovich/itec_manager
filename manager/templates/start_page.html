@@ -13,51 +13,68 @@
 {% if user.is_authenticated == False %}
 <div class="login">
         <h1>ITEC</h1>
+        {% if request.path == "/" %}
         <h2>Вход в систему</h2>
         <form action="" method="POST">
         {% csrf_token %}
         <table>{{ form.as_table }}</table>
         <button style="width: 100%;">Войти</button>
         </form>
+        {% else %}
+            <h2>Вы не вошли в систему</h2>
+            <a href="{% url 'manager:start_page' %}">Перейти на страницу входа</a>
+        {% endif %}
 </div>
 {% endif %}
 
 {% if user.is_authenticated %}
-    <div class="navbar">
-        <a href="#">{{ user.first_name }}</a>
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/56/56745.png"
+<div class="navbar">
+    <div class="navbar-block">
+        <a href="{% url 'manager:start_page' %}" class="navbar-logo">ITEC</a>
+    </div>
+    <div class="navbar-block">
+        <a href="{{ user.get_absolute_url }}">{{ user.first_name }}</a>
+        <a href="{{ user.get_absolute_url }}"><img src="{{ user.photo.url }}"
                         height=40px
-                        width=40px
                         alt="Аватар"></a>
         <div class="dropdown">
             <button class="dropbtn">
-                <a href="#">Профиль</a>
+                <p>≡</p>
             </button>
             <div class="dropdown-content">
                 {% if user.is_superuser %}
-                <a href="http://127.0.0.1:8000/admin/" class="header-a">Администрирование</a>
+                <a href="http://127.0.0.1:8000/admin/">Администрирование</a>
                 {% endif %}
-                <a href="#">Личный кабинет</a>
+                <a href="{{ user.get_absolute_url }}">Личный кабинет</a>
                 <a href="#">Сообщения</a>
                 <a href="{% url 'manager:logout' %}">Выйти</a>
             </div>
         </div>
     </div>
+</div>
+<div class="container__main">
     <div class="container__menu">
-        <a href="{% url 'manager:start_page' %}" class="container__menu-logo">ITEC</a>
-        <a href="#" class="container__menu-a">Группы</a>
-        <a href="#" class="container__menu-a">Расписание</a>
-        <a href="#" class="container__menu-a">Чат</a>
-        <a href="#" class="container__menu-a">Преподаватели</a>
-        <a href="#" class="container__menu-a">Лиды</a>
-        <a href="#" class="container__menu-a">Контракты</a>
-        <a href="#" class="container__menu-a">Новости школы</a>
-        <a href="#" class="container__menu-a">Личные данные</a>
-        <a href="#" class="container__menu-a">Заказы</a>
-        <a href="{% url 'manager:logout' %}" class="container__menu-a">Выход</a>
+        {% if user.is_superuser or user.is_staff %}
+        <a href="{% url 'manager:register_user' %}">Создание пользователя</a>
+        {% endif %}
+        <a href="#">Группы</a>
+        <a href="#">Расписание</a>
+        <a href="#">Чат</a>
+        <a href="{% url 'manager:managers_page' %}">Менеджеры</a>
+        <a href="{% url 'manager:teachers_page' %}">Преподаватели</a>
+        <a href="{% url 'manager:students_page' %}">Студенты</a>
+        <a href="#">Лиды</a>
+        <a href="#">Контракты</a>
+        <a href="#">Новости школы</a>
+        <a href="{{ user.get_absolute_url }}">Личные данные</a>
+        <a href="#">Заказы</a>
+        <a href="{% url 'manager:logout' %}">Выход</a>
     </div>
-{% block content %}
-{% endblock %}
+    <div class="main">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 {% endif %}
 
 </div>
